@@ -1,1 +1,770 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seonjeong Hwang | CV & Portfolio</title>
+  <style>
+    :root {
+      --bg: #f8f6f2;
+      --panel: #fff;
+      --text: #1f2428;
+      --muted: #667076;
+      --line: #dde2e4;
+      --accent: #2f6277;
+      --accent-dark: #224b5c;
+      --accent-soft: #e3eef2;
+      --shadow: 0 18px 38px rgba(39, 48, 54, 0.08);
+    }
 
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.58;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 36px 28px;
+      background: var(--panel);
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      overflow-y: auto;
+    }
+    .profile {
+      display: grid;
+      gap: 18px;
+      justify-items: center;
+      text-align: center;
+    }
+    .profile-photo {
+      width: 180px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 18%;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .name {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.15;
+    }
+    .subtitle {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .contact {
+      display: grid;
+      gap: 10px;
+      padding-top: 4px;
+      color: var(--muted);
+      font-size: 14px;
+      font-style: normal;
+      justify-items: center;
+      text-align: center;
+    }
+    .contact a {
+      color: var(--accent);
+      font-weight: 700;
+      word-break: break-word;
+    }
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+    }
+    .social-links span {
+      color: var(--line);
+    }
+    .menu {
+      display: grid;
+      gap: 10px;
+      margin-top: 6px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+    .menu button {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fdfcf9;
+      color: var(--text);
+      font: inherit;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+    }
+    .menu button:hover,
+    .menu button:focus-visible {
+      border-color: var(--accent);
+      outline: none;
+    }
+    .menu button.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .content {
+      min-width: 0;
+      padding: 32px;
+    }
+    .document { display: none; }
+    .document.active { display: block; }
+    .cv-page,
+    .portfolio-page {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .section,
+    .portfolio-item {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .section {
+      padding: 30px;
+      margin-bottom: 24px;
+    }
+    .section h3,
+    .portfolio-group h3 {
+      margin: 0 0 18px;
+      color: var(--accent-dark);
+      font-size: 20px;
+      line-height: 1.25;
+    }
+    .section h4 {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.35;
+    }
+    .profile-role {
+      margin: 0 0 14px;
+      color: var(--text);
+      font-size: 17px;
+      font-weight: 800;
+    }
+    .profile-text {
+      max-width: none;
+      margin: 0;
+      color: #374248;
+      font-size: 17px;
+    }
+    .profile-text + .profile-text { margin-top: 12px; }
+    .cv-stack { margin-top: 24px; }
+    .meta {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .entry {
+      position: relative;
+      padding-left: 24px;
+      margin-top: 22px;
+    }
+    .entry:first-of-type { margin-top: 0; }
+    .entry::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+    }
+    .entry ul,
+    .compact-list {
+      margin: 10px 0 0;
+      padding-left: 18px;
+    }
+    .entry li,
+    .compact-list li { margin: 5px 0; }
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 11px;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .skill-group { margin-top: 16px; }
+    .skill-group:first-of-type { margin-top: 0; }
+    .skill-group h4 {
+      margin: 0 0 9px;
+      font-size: 14px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .publication {
+      display: grid;
+      gap: 3px;
+      padding: 15px 0;
+      border-top: 1px solid var(--line);
+    }
+    .publication:first-of-type {
+      padding-top: 0;
+      border-top: 0;
+    }
+    .publication strong { line-height: 1.35; }
+    .publication span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .venue {
+      color: var(--accent-dark);
+      font-weight: 800;
+    }
+
+    .portfolio-group { margin-top: 24px; }
+    .portfolio-item {
+      margin-top: 12px;
+      overflow: hidden;
+    }
+    .portfolio-item summary {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      padding: 20px 22px;
+      cursor: pointer;
+      list-style: none;
+    }
+    .portfolio-item summary::-webkit-details-marker { display: none; }
+    .portfolio-item summary::after {
+      content: "+";
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .portfolio-item[open] summary::after { content: "-"; }
+    .portfolio-title {
+      display: grid;
+      gap: 4px;
+    }
+    .portfolio-title strong {
+      font-size: 17px;
+      line-height: 1.32;
+    }
+    .portfolio-title span {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .portfolio-body {
+      padding: 0 22px 22px;
+      border-top: 1px solid var(--line);
+    }
+    .paper-layout { padding-top: 20px; }
+    .detail-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .detail-block h4 {
+      margin: 0 0 7px;
+      color: var(--accent-dark);
+      font-size: 15px;
+    }
+    .detail-block p { margin: 0; }
+    .detail-block ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .detail-block li { margin: 5px 0; }
+    .paper-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .paper-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 11px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .figure-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .paper-figure {
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .paper-figure.figure-full {
+      flex: 0 1 min(100%, 760px);
+      max-width: min(100%, 760px);
+    }
+    .paper-figure.figure-half {
+      flex: 0 1 min(calc((100% - 14px) / 2), 380px);
+      max-width: min(calc((100% - 14px) / 2), 380px);
+    }
+    .paper-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+    .paper-figure figcaption {
+      padding: 10px 12px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 820px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar {
+        position: relative;
+        height: auto;
+        padding: 24px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .profile-photo { width: 104px; }
+      .content { padding: 18px; }
+      .section { padding: 24px; }
+      .paper-figure.figure-half {
+        flex-basis: 100%;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Profile and navigation">
+      <section class="profile">
+        <img class="profile-photo" src="photo.png" alt="황선정 프로필 사진">
+        <div>
+          <h1 class="name">황선정</h1>
+          <p class="subtitle">Seonjeong Hwang</p>
+        </div>
+        <address class="contact">
+          <span>(+82) 010-2323-5608</span>
+          <span>seonjeongh@postech.ac.kr</span>
+          <span>seonjeongh28@gmail.com</span>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/seonjeong-hwang-699734202" target="_blank" rel="noreferrer">LinkedIn</a>
+            <span>|</span>
+            <a href="https://scholar.google.com/citations?user=Ohvv-8QAAAAJ&amp;hl=ko&amp;oi=sra" target="_blank" rel="noreferrer">Google Scholar</a>
+            <span>|</span>
+            <a href="https://github.com/SeonjeongHwang" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </address>
+      </section>
+      <nav class="menu" aria-label="Content menu">
+        <button type="button" class="active" data-document="cv" aria-current="page">CV</button>
+        <button type="button" data-document="portfolio">Portfolio</button>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <article class="document cv-page active" id="cv" aria-label="CV">
+        <section class="section">
+          <h3>Profile</h3>
+          <p class="profile-role">Ph.D. | LLM/NLP Research Engineer</p>
+          <p class="profile-text">자연어처리, 대규모 언어모델, 생성형 AI 기반의 데이터 생성, 모델 학습, 자동 평가, 질의응답 시스템 개발 경험을 보유한 AI 연구개발 엔지니어입니다. 박사과정 동안 자동 질문 생성, QA 데이터 합성, cross-lingual transfer, 난이도 제어 기반 문항 생성 연구를 수행하며 데이터 부족 문제를 해결하기 위한 방법론을 연구했습니다. LLM 기반 데이터 합성 및 평가, QA/RAG 시스템 개발, 다국어 AI 모델링, PEFT 기반 모델 학습, 벤치마크 데이터셋 구축 경험을 바탕으로 데이터 구축부터 모델 개발, 평가 자동화까지 연결되는 AI 파이프라인 설계와 구현에 강점이 있습니다.</p>
+        </section>
+
+        <div class="cv-stack">
+          <section class="section">
+            <h3>Core Skills</h3>
+            <div class="skill-group">
+              <h4>Programming Languages</h4>
+              <div class="tag-cloud">
+                <span class="tag">Python</span>
+                <span class="tag">Bash/Shell Script</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h4>ML/DL Frameworks</h4>
+              <div class="tag-cloud">
+                <span class="tag">PyTorch</span>
+                <span class="tag">TensorFlow</span>
+                <span class="tag">Hugging Face Transformers</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h4>LLM Training & Inference</h4>
+              <div class="tag-cloud">
+                <span class="tag">PEFT/LoRA</span>
+                <span class="tag">Hugging Face Accelerate</span>
+                <span class="tag">DeepSpeed</span>
+                <span class="tag">vLLM</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h4>Infrastructure & Tools</h4>
+              <div class="tag-cloud">
+                <span class="tag">Linux</span>
+                <span class="tag">Slurm</span>
+                <span class="tag">Git</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="education">
+            <h3>Education</h3>
+            <div class="entry">
+              <h4>Integrated M.S. & Ph.D., Graduate School of AI</h4>
+              <p class="meta">POSTECH | 2021. 03. - 2026. 02.</p>
+              <ul>
+                <li>Advisor: Gary Geunbae Lee</li>
+                <li>Cumulative GPA: 4.15 / 4.3</li>
+                <li>Research Area: Data Synthesis, Conversational QA, Multi-hop QA, Question Generation, LLM Evaluation</li>
+              </ul>
+            </div>
+            <div class="entry">
+              <h4>B.S., Computer Science and Engineering</h4>
+              <p class="meta">Ewha Womans University | 2017. 03. - 2021. 02.</p>
+              <ul>
+                <li>Cumulative GPA: 4.17 / 4.3</li>
+                <li>Ranked 1st in Computer Science and Engineering</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="section" id="projects">
+            <h3>Research & Industry Projects</h3>
+            <div class="entry">
+              <h4>Whale UBT 자동 채점 및 자동 출제 시스템 개발 연구</h4>
+              <p class="meta">NAVER & NSDevil | 2025. 05. - 2025. 12.</p>
+              <ul>
+                <li>LLM prompt engineering과 PEFT 기반 데이터 합성 및 자동 채점 기술 개발</li>
+                <li>Context engineering, LLM-as-a-Judge, RAG를 적용한 multi-agent 난이도 제어 독해 문항 생성 시스템 개발</li>
+              </ul>
+            </div>
+            <div class="entry">
+              <h4>문항 유사도 분석 및 한국어능력평가 자동 생성 알고리즘 연구</h4>
+              <p class="meta">NSDevil | 2023. 02. - 2023. 12.</p>
+              <ul>
+                <li>Hugging Face Transformers 기반 사전학습 언어모델 SFT로 한국어 독해 문항 생성 multi-stage 파이프라인 개발</li>
+              </ul>
+            </div>
+            <div class="entry">
+              <h4>고성능 비지도 및 자기지도 대화 시스템 개발</h4>
+              <p class="meta">Samsung Research AI Center | 2022. 04. - 2022. 12.</p>
+              <ul>
+                <li>대규모 문서에서 대화형 질의응답 학습 데이터를 자동 합성하고 QA 모델을 훈련하는 end-to-end 파이프라인 개발</li>
+              </ul>
+            </div>
+            <div class="entry">
+              <h4>딥러닝 기반 NLP 학습 데이터 구축 및 웹 인터페이스 프로토타입 개발</h4>
+              <p class="meta">ETRI | 2020. 07. - 2020. 11.</p>
+              <ul>
+                <li>관계 추출을 위한 BERT 기반 multi-task learning 방법론 개발</li>
+                <li>Biomedical 관계 추출 결과를 시각적으로 확인할 수 있는 웹 인터페이스 프로토타입 개발</li>
+              </ul>
+            </div>
+            <div class="entry">
+              <h4>항공산업 언어 기계번역 알고리즘 개발</h4>
+              <p class="meta">TOUR SOFT | 2019. 06. - 2020. 05.</p>
+              <ul>
+                <li>Seq2Seq with Attention 기반 항공산업 도메인 특화 기계번역 모델 개발</li>
+                <li>N-gram 기반 sentence segmentation을 통한 텍스트 전처리 최적화</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="section" id="publications">
+            <h3>Publications</h3>
+            <div class="publication"><strong>A Multi-Agent Framework for Feature-Constrained Difficulty Control in Reading Comprehension Item Generation</strong><span>Seonjeong Hwang, Jun Seo, Hyounghun Kim, Gary Geunbae Lee</span><span class="venue">ACL 2026</span></div>
+            <div class="publication"><strong>Can LLMs Estimate Cognitive Complexity of Reading Comprehension Items?</strong><span>Seonjeong Hwang, Hyounghun Kim, Gary Geunbae Lee</span><span class="venue">ACL 2026</span></div>
+            <div class="publication"><strong>Why Do Multilingual Reasoning Gaps Emerge in Reasoning Language Models?</strong><span>Deokhyung Kang, Seonjeong Hwang, Daehui Kim, Hyounghun Kim, Gary Geunbae Lee</span><span class="venue">ACL 2026 Findings</span></div>
+            <div class="publication"><strong>Difficulty-Controllable Cloze Question Distractor Generation</strong><span>Seokhoon Kang, Yejin Jeon, Seonjeong Hwang, Gary Geunbae Lee</span><span class="venue">ACL 2026</span></div>
+            <div class="publication"><strong>KOBLEX: Open Legal Question Answering with Multi-hop Reasoning</strong><span>Jihyung Lee*, Daehui Kim*, Seonjeong Hwang, Hyounghun Kim, Gary Geunbae Lee</span><span class="venue">EMNLP 2025</span></div>
+            <div class="publication"><strong>MiLQ: Benchmarking IR Models for Bilingual Web Search with Mixed Language Queries</strong><span>Jonghwi Kim, Deokhyung Kang, Seonjeong Hwang, Yunsu Kim, Jungseul Ok, Gary Lee</span><span class="venue">EMNLP 2025</span></div>
+            <div class="publication"><strong>한국어 sLLM 기반 말하기 문제 자동 생성 및 적합성 평가 파이프라인</strong><span>서준, 황선정, 이근배</span><span class="venue">HCLT 2025</span></div>
+            <div class="publication"><strong>Cross-lingual Transfer for Automatic Question Generation by Learning Interrogative Structures in Target Languages</strong><span>Seonjeong Hwang, Yunsu Kim, Gary Geunbae Lee</span><span class="venue">EMNLP 2024</span></div>
+            <div class="publication"><strong>Cross-lingual Back-Parsing: Utterance Synthesis from Meaning Representation for Zero-Resource Semantic Parsing</strong><span>Deokhyung Kang, Seonjeong Hwang, Yunsu Kim, Gary Geunbae Lee</span><span class="venue">EMNLP 2024</span></div>
+            <div class="publication"><strong>Explainable Multi-hop Question Generation: An End-to-End Approach without Intermediate Question Labeling</strong><span>Seonjeong Hwang, Yunsu Kim, Gary Geunbae Lee</span><span class="venue">LREC-COLING 2024</span></div>
+            <div class="publication"><strong>Multi-Type Conversational Question-Answer Generation with Closed-ended and Unanswerable Questions</strong><span>Seonjeong Hwang, Yunsu Kim, Gary Geunbae Lee</span><span class="venue">AACL-IJCNLP 2022</span></div>
+            <div class="publication"><strong>Conversational QA Dataset Generation with Answer Revision</strong><span>Seonjeong Hwang, Gary Geunbae Lee</span><span class="venue">COLING 2022</span></div>
+            <div class="publication"><strong>대화형 질의응답 말뭉치 자동 생성에 대한 연구</strong><span>황선정, 이근배</span><span class="venue">HCLT 2021 Best Paper</span></div>
+            <div class="publication"><strong>A Sequential and Intensive Weighted Language Modeling Scheme for Multi-task Learning-based Natural Language Understanding</strong><span>Suhyune Son*, Seonjeong Hwang*, Sohyeon Bae*, Soo Jun Park, Jang-Hwan Choi</span><span class="venue">Applied Sciences 11.7, 2021</span></div>
+            <div class="publication"><strong>스마트폰으로 촬영된 알약 이미지의 식별 마크 인식 모델을 이용한 알약 인식 및 정보 제공 시스템</strong><span>배소현*, 손수현*, 전예진*, 황선정*</span><span class="venue">한국정보과학회 학술발표논문집, 2020</span></div>
+          </section>
+
+          <section class="section" id="patents">
+            <h3>Patents & Software</h3>
+            <ul class="compact-list">
+              <li>서준, 황선정, 이근배, 문항 평가를 수행하고 평가 모델을 학습시키는 전자 장치 및 방법. 특허출원, 10-2025-0143324, 2025</li>
+              <li>서준, 황선정, 이근배, 한국어 sLLM을 활용한 말하기 문제 자동 생성 및 적합성 평가 방법. 소프트웨어 등록, C-2025-040820, 2025</li>
+              <li>황선정, 이근배, 자동 질의응답 데이터 생성 방법 및 장치. 특허등록, 10-2725657, 2024</li>
+              <li>황선정, 이근배, Self-feeding 방식의 대화형 질의응답 시스템 자동 구축 프레임워크. 소프트웨어 등록, C-2021-056471, 2021</li>
+            </ul>
+          </section>
+
+          <section class="section" id="experience">
+            <h3>Research Experience</h3>
+            <div class="entry"><h4>석박통합과정 연구원</h4><p class="meta">NLP Group, POSTECH | 2021. 03. - 2026. 02.</p></div>
+            <div class="entry"><h4>학부연구생</h4><p class="meta">Medical AI & CV Lab, Ewha Womans University | 2020. 03. - 2021. 02.</p></div>
+            <div class="entry"><h4>학부연구생</h4><p class="meta">Bioinformatics Lab, Ewha Womans University | 2019. 04. - 2020. 02.</p></div>
+          </section>
+
+          <section class="section">
+            <h3>Teaching</h3>
+            <ul class="compact-list">
+              <li>포스코그룹 인공지능 활용 전문가 양성과정, 데이터마이닝 실습조교 | 2024. 04. - 2024. 05.</li>
+              <li>포스코그룹 인공지능 활용 전문가 양성과정, 자연어처리 실습조교 | 2022. 11. - 2022. 12.</li>
+            </ul>
+          </section>
+
+          <section class="section">
+            <h3>Scholarships</h3>
+            <ul class="compact-list">
+              <li>한국장학재단 이공계장학금 | 2019 - 2021</li>
+              <li>이화여자대학교 성적우수 장학금 최우수 | 2017 - 2020</li>
+              <li>이화여자대학교 전공리더십 장학금 | 2017</li>
+              <li>이화여자대학교 튜터링 장학금 | 2019, 2020</li>
+            </ul>
+          </section>
+        </div>
+      </article>
+
+      <article class="document portfolio-page" id="portfolio" aria-label="Portfolio">
+        <section class="portfolio-group" aria-labelledby="paper-heading">
+          <h3 id="paper-heading">논문</h3>
+
+          <details class="portfolio-item" open>
+            <summary><span class="portfolio-title"><strong>A Multi-Agent Framework for Feature-Constrained Difficulty Control in Reading Comprehension Item Generation</strong><span>ACL 2026 Main | 1저자</span></span></summary>
+            <div class="portfolio-body"><div class="paper-layout"><div class="detail-grid">
+              <div class="paper-links"><a href="https://arxiv.org/abs/2605.19316" target="_blank" rel="noreferrer">Paper URL</a><a href="assets/papers/mafig.pdf" target="_blank" rel="noreferrer">Download PDF</a></div>
+              <div class="detail-block"><h4>연구 목적</h4><p>학습용 문항의 난이도를 조절할 때 지문의 길이, 어휘 수준, 추론 복잡도 등의 문항 특징(item features)을 제어하는 방식의 효과가 입증되었음. 하지만 단일 LLM prompting 방식은 세부 제약 사항 미준수 및 난이도 조절의 불확실성 문제가 존재함. 본 연구는 대규모 학습자 응답 데이터가 부재한 상황에서도 정교하고 일관된 난이도의 독해 문항을 생성할 수 있는 프레임워크 구축을 목표로 함.</p></div>
+              <div class="detail-block"><h4>접근 방법 및 결과</h4><p>LLM 기반의 Role-specialized agent들과 evaluator들로 구성된 멀티 에이전트 프레임워크인 MAFIG를 제안함. 본 프레임워크는 에이전트들 간의 협업 및 반복적인 문항 개선을 통해 multi-dimensional constraints를 준수하는 독해 문항을 생성함. 또한 교육학적 원리를 반영한 difficulty-calibrated feature constraint sequence를 설계하여, 생성된 문항 간의 명확하고 일관된 난이도 위계를 보장함. 실험 결과, GPT-5 기반의 prompting-based baseline 대비 constraint satisfaction 및 difficulty calibration 면에서 우수한 성능을 기록함.</p></div>
+              <div class="detail-block"><h4>본인 역할</h4><p>문제 정의, 관련 연구 탐색, 방법론 설계 및 구현, 실험 및 분석, 논문 작성 등 전 과정을 수행함.</p></div>
+              <div class="figure-grid">
+                <figure class="paper-figure figure-half"><img src="assets/figures/mafig_example.png" alt="MAFIG feature-constrained item generation example"><figcaption>Feature constraints를 활용한 독해 문항 난이도 제어 예시.</figcaption></figure>
+                <figure class="paper-figure figure-full"><img src="assets/figures/mafig_framework.png" alt="MAFIG multi-agent framework overview"><figcaption>MAFIG multi-agent framework overview.</figcaption></figure>
+              </div>
+            </div></div></div>
+          </details>
+
+          <details class="portfolio-item">
+            <summary><span class="portfolio-title"><strong>Why Do Multilingual Reasoning Gaps Emerge in Reasoning Language Models?</strong><span>ACL 2026 Findings | 공저자</span></span></summary>
+            <div class="portfolio-body"><div class="paper-layout"><div class="detail-grid">
+              <div class="paper-links"><a href="https://arxiv.org/abs/2510.27269" target="_blank" rel="noreferrer">Paper URL</a><a href="assets/papers/reasoning-gap.pdf" target="_blank" rel="noreferrer">Download PDF</a></div>
+              <div class="detail-block"><h4>연구 목적</h4><p>Qwen3, GPT-oss 등 Reasoning Language Models(RLMs)에서 발생하는 high-resource 언어와 low-resource 언어 간의 multilingual reasoning gap의 근본적인 원인을 규명하고자 함.</p></div>
+              <div class="detail-block"><h4>접근 방법 및 결과</h4><p>모델의 추론 과정을 input understanding, reasoning, response generation의 3단계로 정형화하고, 각 단계에서의 실패가 최종 성능에 미치는 영향을 stage-wise attribution analysis를 통해 수치적으로 분석함. 결과적으로 low-resource 언어에서 발생하는 추론 오류의 핵심 원인이 understanding 단계에서의 실패임을 입증함. 또한 understanding 실패를 자동으로 탐지하기 위해 supervised detector 등 다양한 방법론들을 적용하여 understanding 실패 신호의 탐지 가능성을 확인했으며, 실패가 감지될 때만 선별적으로 번역을 수행하는 Selective Translation 기법의 효과를 확인함. 해당 기법을 통해 약 20%의 입력만 번역하고도 full translation에 근접한 성능 향상을 달성하며 추론 효율성과 정확도를 동시에 확보함.</p></div>
+              <div class="detail-block"><h4>본인 역할</h4><p>방법론 및 실험 설계, 논문 작성 등 참여함.</p></div>
+              <div class="figure-grid"><figure class="paper-figure figure-half"><img src="assets/figures/reasoning_gap.png" alt="Understanding failure example in multilingual reasoning"><figcaption>Low-resource language input에서 understanding failure가 최종 오답으로 이어지는 예시.</figcaption></figure></div>
+            </div></div></div>
+          </details>
+
+          <details class="portfolio-item">
+            <summary><span class="portfolio-title"><strong>Difficulty-Controllable Cloze Question Distractor Generation</strong><span>ACL 2026 Main | 공저자</span></span></summary>
+            <div class="portfolio-body"><div class="paper-layout"><div class="detail-grid">
+              <div class="paper-links"><a href="https://arxiv.org/abs/2511.01526" target="_blank" rel="noreferrer">Paper URL</a><a href="assets/papers/distractor.pdf" target="_blank" rel="noreferrer">Download PDF</a></div>
+              <div class="detail-block"><h4>연구 목적</h4><p>Multiple-choice cloze question 생성 시 난이도가 조절된 고품질의 오답 선택지를 생성하는 데 따르는 한계를 해결하고자 함. 특히 난이도가 라벨링된 데이터셋의 부족과 기존 모델들의 난이도 제어 성능 저하 문제를 극복하고자 함.</p></div>
+              <div class="detail-block"><h4>접근 방법 및 결과</h4><p>Information restriction 기반의 two-way data augmentation 파이프라인을 설계하여 난이도별로 라벨링된 대규모 오답 데이터셋을 구축함. 이를 바탕으로 auxiliary task가 포함된 multitask learning을 적용해 선택지 생성 모델이 정답과 오답의 차이를 명확히 구분하고 의도한 난이도(Easy/Hard)를 정확히 반영하도록 sLLM을 파인튜닝함. 실험 결과, GPT-4o 기반 prompting 방법론 대비 difficulty alignment 및 invalid distractor ratio 면에서 월등한 성능을 입증함.</p></div>
+              <div class="detail-block"><h4>본인 역할</h4><p>실험 설계 개선, 논문 작성 등 참여함.</p></div>
+              <div class="figure-grid"><figure class="paper-figure figure-full"><img src="assets/figures/cloze.png" alt="Dataset augmentation pipeline for distractor generation"><figcaption>난이도별 distractor 생성을 위한 data augmentation pipeline.</figcaption></figure></div>
+            </div></div></div>
+          </details>
+
+          <details class="portfolio-item">
+            <summary><span class="portfolio-title"><strong>Can LLMs Estimate Cognitive Complexity of Reading Comprehension Items?</strong><span>ACL 2026 Main | 1저자</span></span></summary>
+            <div class="portfolio-body"><div class="paper-layout"><div class="detail-grid">
+              <div class="paper-links"><a href="https://arxiv.org/abs/2510.25064" target="_blank" rel="noreferrer">Paper URL</a><a href="assets/papers/complexity.pdf" target="_blank" rel="noreferrer">Download PDF</a></div>
+              <div class="detail-block"><h4>연구 목적</h4><p>지문 내에서의 Evidence Scope(근거 범위) 및 지문과 선택지 간의 Transformation Level(변형 정도) 등 인지적 복잡도 결정하는 특성들은 독해 문항의 난이도를 결정하는 핵심 요소로 알려져 있음. 지문 길이, 어휘 난이도 등의 표면적 특성들과 달리, 분석 과정에서 전문가의 판단에 의존해온 고차원적 인지 요인을 LLM의 추론 능력을 통해 자동 측정할 수 있는지 확인하고자 함.</p></div>
+              <div class="detail-block"><h4>접근 방법 및 결과</h4><p>인지적 복잡도를 기준으로 문항을 라벨링한 데이터셋 ReCo를 구축하여 8종의 LLM을 대상으로 복잡도 측정 능력을 평가했으며, 최신 오픈소스 모델들이 GPT-4o와 대등하거나 이를 상회하는 수준으로 인지적 요인을 근사할 수 있음을 입증함. 다만, 모델이 문항의 정답을 맞히더라도 생성한 풀이 과정에 포함된 인지적 특성을 명시적으로 식별하는 데에는 한계가 있음을 확인함.</p></div>
+              <div class="detail-block"><h4>본인 역할</h4><p>문제 정의, 관련 연구 탐색, 어노테이션 과정 설계 및 진행, 실험 및 분석, 논문 작성 등 전 과정을 수행함.</p></div>
+              <div class="figure-grid"><figure class="paper-figure figure-half"><img src="assets/figures/reco.png" alt="ReCo cognitive complexity annotation example"><figcaption>Evidence Scope와 Transformation Level 라벨링 예시.</figcaption></figure></div>
+            </div></div></div>
+          </details>
+
+          <details class="portfolio-item">
+            <summary><span class="portfolio-title"><strong>KoBLEX: Open Legal Question Answering with Multi-hop Reasoning</strong><span>EMNLP 2025 Main | 공저자</span></span></summary>
+            <div class="portfolio-body"><div class="paper-layout"><div class="detail-grid">
+              <div class="paper-links"><a href="https://aclanthology.org/2025.emnlp-main.200/" target="_blank" rel="noreferrer">Paper URL</a><a href="assets/papers/koblex.pdf" target="_blank" rel="noreferrer">Download PDF</a></div>
+              <div class="detail-block"><h4>연구 목적</h4><p>Hallucination 위험이 크고 복잡한 법률 도메인에서, 조문에 근거한 개방형 QA 및 multi-hop reasoning 능력을 정밀하게 평가하고 향상시키고자 함. 단순 검색을 넘어 법률 전문가 수준의 지식 기반 조문 해석과 multi-hop reasoning 능력을 확인할 수 있는 한국어-영어 bilingual 벤치마크 및 고성능 QA 프레임워크 구축을 목표로 함.</p></div>
+              <div class="detail-block"><h4>접근 방법 및 결과</h4><p>관련 조문을 탐색해 multi-hop QA 쌍을 생성하는 파이프라인을 설계함. 또한 합성 데이터에 대한 전문가의 교차 검증 및 필터링을 통해 226개의 고품질 데이터로 구성된 bilingual 벤치마크인 KOBLEX를 구축함. 한편으로, LLM의 내부 지식을 활용해 가상의 조문을 생성함으로써 검색 효율을 높이는 ParSeR 방법론과, 법률적 충실도를 측정하는 L-FEval metric을 제안함. 실험 결과, KOBLEX 벤치마크에서 ParSeR가 기존 RAG 기반 방법론 대비 조문 검색 및 답변 품질 면에서 SOTA 성능을 달성함.</p></div>
+              <div class="detail-block"><h4>본인 역할</h4><p>데이터 생성 파이프라인 및 ParSeR 방법론 설계, 전문가 평가 진행, 논문 작성 등 참여함.</p></div>
+              <div class="figure-grid">
+                <figure class="paper-figure figure-half"><img src="assets/figures/koblex_example.png" alt="KoBLEX legal QA task example"><figcaption>복수 법률 조문을 근거로 답변해야 하는 KoBLEX task example.</figcaption></figure>
+                <figure class="paper-figure figure-full"><img src="assets/figures/koblex_pipeline.png" alt="KoBLEX legal QA pipeline"><figcaption>KoBLEX 벤치마크 구축을 위한 생성 및 검증 파이프라인.</figcaption></figure>
+                <figure class="paper-figure figure-full"><img src="assets/figures/parser.png" alt="ParSeR retrieval pipeline"><figcaption>Parametric provision-guided Selection Retrieval (ParSeR) pipeline.</figcaption></figure>
+              </div>
+            </div></div></div>
+          </details>
+
+          <details class="portfolio-item">
+            <summary><span class="portfolio-title"><strong>MiLQ: Benchmarking IR Models for Bilingual Web Search with Mixed Language Queries</strong><span>EMNLP 2025 Main | 공저자</span></span></summary>
+            <div class="portfolio-body"><div class="paper-layout"><div class="detail-grid">
+              <div class="paper-links"><a href="https://aclanthology.org/2025.emnlp-main.1153/" target="_blank" rel="noreferrer">Paper URL</a><a href="assets/papers/milq.pdf" target="_blank" rel="noreferrer">Download PDF</a></div>
+              <div class="detail-block"><h4>연구 목적</h4><p>이중 언어 사용자들이 한 문장 내에서 여러 언어를 혼용하는 code-switching 현상이 실제 HCI 환경에서 빈번하게 발생함에도 불구하고, 이러한 형태의 질의에 대한 모델 성능을 평가할 수 있는 Information Retrieval(IR) 벤치마크가 부재함. 기존의 검색 모델들이 실제 사용자가 생성한 mixed-language query를 효과적으로 처리할 수 있는지 확인하고, code-switching 전략이 검색 효율성에 미치는 영향을 분석할 수 있는 기반을 마련하고자 함.</p></div>
+              <div class="detail-block"><h4>접근 방법 및 결과</h4><p>실제 이중 언어 사용자들이 작성한 최초의 mixed-language query 벤치마크인 MiLQ를 구축하여 공개하고, 기존 다국어 IR 모델들의 mixed-language query IR 성능에 대한 baseline을 제시함. 실험을 통해 의도적인 영어 용어 혼용이 영문 문서 검색 성능을 유의미하게 향상시키는 효과적인 전략임을 확인했으며, 토큰 단위 분석을 통해 언어 혼용이 검색 결과에 기여하는 구체적인 메커니즘을 밝힘.</p></div>
+              <div class="detail-block"><h4>본인 역할</h4><p>실험 설계 및 결과 분석에 대한 토론, 논문 작성 등 참여함.</p></div>
+              <div class="figure-grid"><figure class="paper-figure figure-full"><img src="assets/figures/milq.png" alt="Mixed language query illustration"><figcaption>German, English, mixed-language query 예시와 code-switching 구조.</figcaption></figure></div>
+            </div></div></div>
+          </details>
+
+          <details class="portfolio-item">
+            <summary><span class="portfolio-title"><strong>Cross-lingual Transfer for Automatic Question Generation by Learning Interrogative Structures in Target Languages</strong><span>EMNLP 2024 Main | 1저자</span></span></summary>
+            <div class="portfolio-body"><div class="paper-layout"><div class="detail-grid">
+              <div class="paper-links"><a href="https://aclanthology.org/2024.emnlp-main.186/" target="_blank" rel="noreferrer">Paper URL</a><a href="assets/papers/quist.pdf" target="_blank" rel="noreferrer">Download PDF</a></div>
+              <div class="detail-block"><h4>연구 목적</h4><p>다양한 유형의 영어 QA 데이터가 공개 되어있는 반면, 타언어에서는 데이터 부족 문제를 겪고 있음. 타언어의 데이터를 구축하여 모델을 훈련시키거나 고비용의 다국어 LLM을 활용하지 않고도, 영어 데이터만으로 학습된 모델을 다양한 언어의 QA 데이터 생성에 활용할 수 있도록 하는 효율적인 cross-lingual transfer 방법론을 찾고자 함.</p></div>
+              <div class="detail-block"><h4>접근 방법 및 결과</h4><p>질문의 맥락 텍스트와 목표 답변을 기반으로 생성될 질문의 의문사를 예측하는 모델과, 텍스트, 답안, 그리고 예측된 의문사에 해당되는 소량의 question exemplar를 입력 받아 질문을 생성하는 모델로 구성된 QuIST 프레임워크를 제안함. 질문 생성 모델은 주어진 텍스트와 답변에 부합하는 질문의 semantic을 구성하면서도, question exemplar의 통사 구조를 반영하여 질문을 생성하도록 훈련됨. 이러한 훈련 방식을 통해 타언어에 대해서도 해당 언어의 question exemplar만을 참조하여 의미적·통사적으로 높은 품질의 질문을 생성할 수 있으며, 특히 훈련 단계에서는 영어 데이터만을 활용함으로써 높은 language scalability를 확보함. 실험 결과, mBERT와 mT5 기반의 QuIST가 GPT-3.5-turbo에 상응하는 생성 품질을 달성함. 또한 다국어 QA 모델 학습을 위한 데이터 증강 측면에서도 기존 방식보다 높은 실용성을 입증함.</p></div>
+              <div class="detail-block"><h4>본인 역할</h4><p>문제 정의, 관련 연구 탐색, 방법론 설계 및 구현, 실험 및 분석, 논문 작성 등 전 과정을 수행함.</p></div>
+              <div class="figure-grid"><figure class="paper-figure figure-full"><img src="assets/figures/quist.png" alt="QuIST cross-lingual question generation overview"><figcaption>Question type과 exemplar를 이용하는 QuIST 학습/추론 구조.</figcaption></figure></div>
+            </div></div></div>
+          </details>
+
+          <details class="portfolio-item">
+            <summary><span class="portfolio-title"><strong>Cross-lingual Back-Parsing: Utterance Synthesis from Meaning Representation for Zero-Resource Semantic Parsing</strong><span>EMNLP 2024 Main | 공저자</span></span></summary>
+            <div class="portfolio-body"><div class="paper-layout"><div class="detail-grid">
+              <div class="paper-links"><a href="https://aclanthology.org/2024.emnlp-main.792/" target="_blank" rel="noreferrer">Paper URL</a><a href="assets/papers/cbp.pdf" target="_blank" rel="noreferrer">Download PDF</a></div>
+              <div class="detail-block"><h4>연구 목적</h4><p>자연어 질의를 meaning representation(SQL, Python 코드 등)으로 변환하는 Semantic Parsing은 영어를 제외한 타언어의 학습 데이터 확보에 큰 비용이 발생함. 번역기나 병렬 코퍼스 같은 외부 리소스가 없는 zero-resource 환경에서도 영문 meaning representation으로부터 목표 언어의 utterance를 생성하여 모델의 cross-lingual transfer 능력을 향상시킬 수 있는 데이터 증강 방법론을 찾고자 함.</p></div>
+              <div class="detail-block"><h4>접근 방법 및 결과</h4><p>목표 언어의 utterance를 합성하는 생성기와, 품질 필터링 메커니즘으로 구성된 cross-lingual back-parsing(CBP) 방법론을 제안함. 다국어 PLM의 hidden representation에서 언어 식별 정보를 분리할 수 있다는 점에서 착안하여, 목표 언어의 단일 언어 코퍼스만으로 훈련 가능한 source-switched denoising objective를 설계하고 이를 통해 language-specific adapter를 학습시킴. 실험 결과, 제안된 모델은 Mschema2QA 및 Xspider 벤치마크에서 SOTA 대비 향상된 성능을 보였으며, 특히 번역기 기반 데이터 증강 기법이 적용된 모델보다 Mschema2QA 에서 더 높은 정확도를 기록함.</p></div>
+              <div class="detail-block"><h4>본인 역할</h4><p>방법론 설계, 아키텍쳐 구현 및 모델 훈련, 논문 작성 등 참여함.</p></div>
+              <div class="figure-grid"><figure class="paper-figure figure-full"><img src="assets/figures/cbp.png" alt="Cross-lingual Back-Parsing utterance generator training"><figcaption>Language adapter와 source-switched denoising을 활용한 utterance generator 학습.</figcaption></figure></div>
+            </div></div></div>
+          </details>
+
+          <details class="portfolio-item">
+            <summary><span class="portfolio-title"><strong>Explainable Multi-hop Question Generation: An End-to-End Approach without Intermediate Question Labeling</strong><span>LREC-COLING 2024 Main | 1저자</span></span></summary>
+            <div class="portfolio-body"><div class="paper-layout"><div class="detail-grid">
+              <div class="paper-links"><a href="https://aclanthology.org/2024.lrec-main.599/" target="_blank" rel="noreferrer">Paper URL</a><a href="assets/papers/e2eqr.pdf" target="_blank" rel="noreferrer">Download PDF</a></div>
+              <div class="detail-block"><h4>연구 목적</h4><p>여러 문서에 흩어진 정보를 기반으로 한 복잡한 추론을 요구하는 multi-hop 질문을 자동으로 생성하는 설명 가능한 방법론을 개발하고자 함. 기존의 end-to-end 구조의 방법론들은 참조 문서가 늘어날수록 질문의 논리적 일관성이 저하되는 한계가 있었음. 또한 step-by-step rewriting은 논리성과 설명 가능성을 높이는 효과적인 접근법이지만, 중간 단계 복잡도의 질문 라벨링이 필수적이라는 한계점이 있었음. 이를 해결하기 위해 중간 단계 질문에 대한 라벨링 없이도 single-hop question을 점진적으로 확장하여 복잡도를 높이는 multi-hop question generation(QG) 프레임워크를 구축하고자 함.</p></div>
+              <div class="detail-block"><h4>접근 방법 및 결과</h4><p>Transformer 아키텍처를 recurrent neural network 구조로 수정한 end-to-end question rewriting (E2EQR) 모델을 제안함. 생성된 질문을 다음 단계의 입력으로 사용하는 일반적인 방법 대신, 질문의 디코딩 과정에서 계산된 hidden states를 후속 time-step으로 전달함으로써 내부적으로 점진적인 question rewriting이 수행될 수 있도록 함. 본 아키텍처는 중간 단계 복잡도의 ground truth 질문 없이도 end-to-end 학습이 가능함. 실험을 통해 3-hop 이상의 높은 복잡도 질문 생성 시나리오에서 논리적 정교함이 뛰어난 SOTA급 성능을 입증하고, 생성된 데이터가 QA 모델 성능 향상을 위한 데이터 증강에도 효과적임을 확인함.</p></div>
+              <div class="detail-block"><h4>본인 역할</h4><p>문제 정의, 관련 연구 탐색, 방법론 설계 및 구현, 실험 및 분석, 논문 작성 등 전 과정을 수행함.</p></div>
+              <div class="figure-grid">
+                <figure class="paper-figure figure-half"><img src="assets/figures/e2eqr_example.png" alt="Multi-hop question generation through question rewriting"><figcaption>여러 문서 정보를 단계적으로 결합해 multi-hop question을 생성하는 예시.</figcaption></figure>
+                <figure class="paper-figure figure-full"><img src="assets/figures/e2eqr_framework.png" alt="E2EQR framework overview"><figcaption>E2EQR framework overview.</figcaption></figure>
+              </div>
+            </div></div></div>
+          </details>
+
+          <details class="portfolio-item">
+            <summary><span class="portfolio-title"><strong>Multi-Type Conversational Question-Answer Generation with Closed-ended and Unanswerable Questions</strong><span>AACL-IJCNLP 2022 Short | 1저자</span></span></summary>
+            <div class="portfolio-body"><div class="paper-layout"><div class="detail-grid">
+              <div class="paper-links"><a href="https://aclanthology.org/2022.aacl-short.22/" target="_blank" rel="noreferrer">Paper URL</a><a href="assets/papers/multicqag.pdf" target="_blank" rel="noreferrer">Download PDF</a></div>
+              <div class="detail-block"><h4>연구 목적</h4><p>대화형 질의응답(CQA) 시스템 구축을 위한 데이터 제작 시 발생하는 높은 비용 문제를 해결하고자 함. 기존의 자동 생성 프레임워크는 주로 open-ended 질문 생성에 국한되어 있어, 실제 대화 환경에서 빈번하게 발생하는 closed-ended (예: yes/no) 질문이나 unanswerable 질문을 처리하는데 한계가 있음. 이를 극복하여 보다 실제적이고 다양한 문항 유형을 포함하는 CQA 데이터 합성 프레임워크를 구축하고자 함.</p></div>
+              <div class="detail-block"><h4>접근 방법 및 결과</h4><p>Open-ended, closed-ended, 그리고 unanswerable 대화형 질문을 모두 합성할 수 있는 MultiCQAG 프레임워크를 제안함. 기존 open-ended CQA 데이터 생성 프레임워크에 closed-ended QA pair 생성 플로우를 통합하고, 부적절한 질의응답 쌍을 필터링하는 동시에 unanswerable 질문을 수집하는 hierarchical answerability classification 알고리즘을 설계함. 실험 결과, 합성된 데이터로 학습한 CQA 모델이 4개 도메인에서 human-annotation 데이터로 훈련된 모델 대비 F1점수가 5.4점 낮은 77.2점을 달성했으며, 사람이 작성한 데이터와 유사한 분포를 보임을 입증함.</p></div>
+              <div class="detail-block"><h4>본인 역할</h4><p>문제 정의, 관련 연구 탐색, 방법론 설계 및 구현, 실험 및 분석, 논문 작성 등 전 과정을 수행함.</p></div>
+              <div class="figure-grid"><figure class="paper-figure figure-full"><img src="assets/figures/multicqag.png" alt="MultiCQAG generation pipeline"><figcaption>Open-ended와 closed-ended 질문을 함께 생성하는 MultiCQAG pipeline.</figcaption></figure></div>
+            </div></div></div>
+          </details>
+
+          <details class="portfolio-item">
+            <summary><span class="portfolio-title"><strong>Conversational QA Dataset Generation with Answer Revision</strong><span>COLING 2022 Short | 1저자</span></span></summary>
+            <div class="portfolio-body"><div class="paper-layout"><div class="detail-grid">
+              <div class="paper-links"><a href="https://aclanthology.org/2022.coling-1.140/" target="_blank" rel="noreferrer">Paper URL</a><a href="assets/papers/cqag-ar.pdf" target="_blank" rel="noreferrer">Download PDF</a></div>
+              <div class="detail-block"><h4>연구 목적</h4><p>도메인 특화 대화형 질의응답(CQA) 시스템 구축에 필요한 대규모 데이터 확보의 비용 문제를 해결하고자 함. 이전 연구의 Conversational QA Generation(CQAG) 프레임워크는 문맥 기반 답변 추출(CAE)과 대화형 질의 생성(CQG)으로 구성된 iterative generation 구조로 이루어져 있어, 초기 답변 추출 단계에서 발생한 오류가 이후 대화 턴의 품질까지 저하시키는 error propagation 문제가 존재함.</p></div>
+              <div class="detail-block"><h4>접근 방법 및 결과</h4><p>Pretrained language model(PLM)이 자연스러운 언어 sequence를 생성하도록 학습되었다는 특성에 기반하여, CQG 모델이 질문 생성 직후 교정된 답변을 연달아 생성하도록 하는 CQG-AR(Answer Revision) 기법을 제안함. 실험 결과, AR 메커니즘이 적용된 CQAG 프레임워크가 합성한 데이터로 훈련된 CQA 모델이 F1 metric에서 기존 방식 대비 13.4점 향상된 성능을 보여주었음. 또한 Wikipedia 도메인에서 훈련된 모델을 타 도메인에 이식하는 domain adaptation 실험에서도 EM metric 기준 최대 13.1점의 유의미한 성능 향상을 기록하여 방법론의 범용성을 입증함.</p></div>
+              <div class="detail-block"><h4>본인 역할</h4><p>문제 정의, 관련 연구 탐색, 방법론 설계 및 구현, 실험 및 분석, 논문 작성 등 전 과정을 수행함.</p></div>
+              <div class="figure-grid"><figure class="paper-figure figure-full"><img src="assets/figures/cqag_ar.png" alt="CQAG-AR generation pipeline"><figcaption>Answer Revision을 포함한 conversational QA dataset generation pipeline.</figcaption></figure></div>
+            </div></div></div>
+          </details>
+        </section>
+
+        <section class="portfolio-group" aria-labelledby="project-heading">
+          <h3 id="project-heading">산학협력 프로젝트</h3>
+
+          <details class="portfolio-item">
+            <summary><span class="portfolio-title"><strong>Whale UBT 자동 채점 및 자동 출제 시스템 개발을 위한 연구</strong><span>NAVER & NSDevil | 2025. 05. - 2025. 12. | 프로젝트 리더</span></span></summary>
+            <div class="portfolio-body"><div class="detail-grid" style="padding-top: 20px;">
+              <div class="detail-block"><h4>프로젝트 목표</h4><p>네이버와 엔에스데블이 공동으로 개발한 Whale UBT 내 탑재될 자동 출제 및 자동 채점 시스템을 위한 사전 연구, 핵심 엔진 구현 및 검증</p></div>
+              <div class="detail-block"><h4>과업 내용</h4><ul><li>CTS, sLLM SFT, LLM prompt engineering 기법들을 서논술형 자동 채점에 맞게 개선 및 성능 분석</li><li>학생 응답 및 채점 데이터 확보 전 모델 검증을 위한 점수별 학생 응답 자동 생성 방법론 연구</li><li>난이도 조절 기능이 있는 문항 자동 생성 시스템 선행 연구</li><li>서논술형 자동 채점 및 피드백 생성 데모 웹 프로그램 제작 및 시현</li></ul></div>
+              <div class="detail-block"><h4>본인 역할</h4><ul><li>데이터 포맷 변환 규격서 작성 및 데이터 전처리 진행</li><li>학생 답안/채점 데이터 없이 채점 기준표와 출제자 예시 답안으로 점수별 예상 학생 답안 생성 flow 개발</li><li>합성 데이터와 LoRA를 활용한 sLLM 자동 채점 모델 훈련 및 평가</li><li>Difficulty-calibrated feature constraint sequence와 LLM 기반 multi-agent framework 개발</li></ul></div>
+              <div class="paper-links"><a href="https://n.news.naver.com/mnews/article/020/0003682584?sid=102" target="_blank" rel="noreferrer">Related News</a></div>
+            </div></div>
+          </details>
+
+          <details class="portfolio-item">
+            <summary><span class="portfolio-title"><strong>문항 유사도 분석 및 한국어능력평가(TOPIK) 자동 생성 알고리즘 연구</strong><span>NSDevil | 2023. 02. - 2023. 12.</span></span></summary>
+            <div class="portfolio-body"><div class="detail-grid" style="padding-top: 20px;">
+              <div class="detail-block"><h4>프로젝트 목표</h4><p>UBT 클라우드 기반 문제은행 데이터 구조에 최적화된 문항 유사도 분석 알고리즘과 TOPIK 대표 문항 자동 생성 AI 모델 개발</p></div>
+              <div class="detail-block"><h4>과업 내용</h4><ul><li>TOPIK 문제은행 데이터 구조 분석 및 문항 유사도 분석 알고리즘 개발</li><li>내용 일치형 문항 자동 생성을 위한 AI 기반 시스템 개발</li><li>문맥 파악형 문항 자동 생성을 위한 AI 기반 시스템 개발</li></ul></div>
+              <div class="detail-block"><h4>본인 역할</h4><ul><li>다지선다형 내용 일치 문항 자동 생성 파이프라인 설계<ul><li>지문으로부터 QA pair를 생성한 뒤 평서문 형식으로 변환하는 생성 전략 도입</li><li>KorQuAD 기반 KLUE RoBERTa와 mT5 질의응답 생성 모델 fine-tuning</li></ul></li></ul></div>
+            </div></div>
+          </details>
+
+          <details class="portfolio-item">
+            <summary><span class="portfolio-title"><strong>고성능 비지도 및 자기지도 대화 시스템 개발</strong><span>Samsung Research AI Center | 2022. 04. - 2022. 12.</span></span></summary>
+            <div class="portfolio-body"><div class="detail-grid" style="padding-top: 20px;">
+              <div class="detail-block"><h4>프로젝트 목표</h4><p>목적지향 대화 시스템과 대화형 질의응답 시스템의 데이터 구축 비용을 줄이기 위해 최소한의 지도 학습으로 동작하는 고성능 대화 시스템 개발</p></div>
+              <div class="detail-block"><h4>과업 내용</h4><ul><li>적은 데이터로 자가 학습이 가능한 목적지향 대화 시스템 개발</li><li>자가 데이터 공급 대화형 질의응답 시스템 개발</li></ul></div>
+              <div class="detail-block"><h4>본인 역할</h4><ul><li>문서 기반 conversational QA sequence를 생성하는 CQAG pipeline 구축</li><li>타당한 QA pair 확보를 위한 Answer Revision mechanism 도입</li><li>대규모 문서로 synthetic CQA 데이터를 생성하고 QA 모델을 훈련하는 end-to-end pipeline 구축</li></ul></div>
+            </div></div>
+          </details>
+        </section>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll("[data-document]");
+    const documents = document.querySelectorAll(".document");
+
+    function showDocument(key) {
+      documents.forEach((section) => {
+        section.classList.toggle("active", section.id === key);
+      });
+      buttons.forEach((button) => {
+        const active = button.dataset.document === key;
+        button.classList.toggle("active", active);
+        if (active) button.setAttribute("aria-current", "page");
+        else button.removeAttribute("aria-current");
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => showDocument(button.dataset.document));
+    });
+  </script>
+</body>
+</html>
